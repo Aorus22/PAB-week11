@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">PPAB-11_L0122018_AlyzaKhoirunNadif</string>
+    <string name="title_calculator">Calculator</string>
+    <string name="title_timer">Timer</string>
+
+    <string name="tambah">+</string>
+    <string name="kurang">-</string>
+    <string name="kali">*</string>
+    <string name="bagi">/</string>
+
+    <string name="seconds">%d</string>
+    <string name="secondstext">Seconds</string>
+
+</resources>
