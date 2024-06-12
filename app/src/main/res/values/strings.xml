@@ -7,8 +7,15 @@
     <string name="kurang">-</string>
     <string name="kali">*</string>
     <string name="bagi">/</string>
+    <string name="result">Result</string>
+    <string name="hintnum1">First Number</string>
+    <string name="hintnum2">Second Number</string>
 
-    <string name="seconds">%d</string>
+    <string name="inittimer">00:00</string>
     <string name="secondstext">Seconds</string>
+    <string name="start">Start</string>
+    <string name="stop">Stop</string>
+    <string name="reset">Reset</string>
+    <string name="continues">Continue</string>
 
 </resources>

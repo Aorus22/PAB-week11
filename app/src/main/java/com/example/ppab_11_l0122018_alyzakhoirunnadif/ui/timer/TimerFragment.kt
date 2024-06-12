@@ -28,7 +28,7 @@ class TimerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        liveDataTimerViewModel = ViewModelProvider(this).get(TimerViewModel::class.java)
+        liveDataTimerViewModel = ViewModelProvider(this)[TimerViewModel::class.java]
         subscribe()
         subscribeToTimerState()
 
@@ -46,23 +46,22 @@ class TimerFragment : Fragment() {
 
         binding.resetButton.setOnClickListener {
             liveDataTimerViewModel.resetTimer()
-            binding.timerTextview.text = "0"
+            binding.timerTextview.text = requireContext().resources.getString(R.string.inittimer)
         }
     }
 
     private fun subscribe() {
-        val elapsedTimeObserver = Observer<Long?> { aLong ->
-            val newText = requireContext().resources.getString(R.string.seconds, aLong)
-            binding.timerTextview.text = newText
+        val elapsedTimeObserver = Observer<String> { formattedTime ->
+            binding.timerTextview.text = formattedTime
         }
-        liveDataTimerViewModel.getElapsedTime().observe(viewLifecycleOwner, elapsedTimeObserver)
+        liveDataTimerViewModel.getFormattedElapsedTime().observe(viewLifecycleOwner, elapsedTimeObserver)
     }
 
     private fun subscribeToTimerState() {
         val timerStateObserver = Observer<TimerState> { state ->
             toggleButtonVisibility(state)
         }
-        liveDataTimerViewModel.timerState.observe(viewLifecycleOwner, timerStateObserver)
+        liveDataTimerViewModel.getTimerState().observe(viewLifecycleOwner, timerStateObserver)
     }
 
     private fun toggleButtonVisibility(state: TimerState) {
@@ -79,7 +78,7 @@ class TimerFragment : Fragment() {
                 binding.continueButton.visibility = View.GONE
                 binding.resetButton.visibility = View.GONE
             }
-            TimerState.STOPPED -> {
+            TimerState.STOP -> {
                 binding.startButton.visibility = View.GONE
                 binding.stopButton.visibility = View.GONE
                 binding.continueButton.visibility = View.VISIBLE
